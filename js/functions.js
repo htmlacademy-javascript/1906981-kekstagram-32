@@ -8,7 +8,7 @@ console.log(checkLength('проверяемая строка', 10));
 
 // Проверка на палиндром.
 
-function checkPalindrome(stroke) {
+function isPalindrome(stroke) {
   const resultStroke = stroke.toLowerCase().replaceAll(' ', '');
   let result = true;
 
@@ -22,7 +22,7 @@ function checkPalindrome(stroke) {
   return result;
 }
 
-console.log(checkPalindrome('Лёша на полке клопа нашёл '));
+console.log(isPalindrome('Лёша на полке клопа нашёл '));
 
 // Положительное число из случайной строки.
 
