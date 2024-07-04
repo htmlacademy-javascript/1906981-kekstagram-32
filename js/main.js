@@ -58,6 +58,10 @@ function getUniqueInteger (min, max) {
   return function () {
     let currentValue = getRandomInteger(min, max);
 
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+
     while (previousValues.includes(currentValue)) {
       currentValue = getRandomInteger(min, max);
     }
@@ -70,29 +74,25 @@ function getUniqueInteger (min, max) {
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 
-const createPost = () => {
-  const randomPostId = getUniqueInteger(1, POSTS_COUNT);
-  const randomPostUrl = getUniqueInteger(1, POSTS_COUNT);
-  const randomPostDescription = getRandomArrayElement(POSTS_DESCRIPTIONS);
-  const randomPostLikes = getUniqueInteger(15, 200);
+const randomPostId = getUniqueInteger(1, POSTS_COUNT);
+const randomPostUrl = getUniqueInteger(1, POSTS_COUNT);
+const randomCommentId = getUniqueInteger(1, 1000000);
 
-  const randomCommentId = getUniqueInteger(1, 1000000);
-  const randomCommentAvatar = getRandomInteger(1, 6);
-  const randomCommentMessage = getRandomArrayElement(POSTS_COMMENTS);
-  const randomCommentAuthor = getRandomArrayElement(COMMENT_NAMES);
+const createPost = () => {
+  const randomPostDescription = getRandomArrayElement(POSTS_DESCRIPTIONS);
 
   const createComment = () => ({
     'id': randomCommentId(),
-    'avatar': `img/avatar-${randomCommentAvatar}.svg`,
-    'message': randomCommentMessage,
-    'name': randomCommentAuthor,
+    'avatar': `img/avatar-${getRandomInteger(1, 6)}.svg`,
+    'message': getRandomArrayElement(POSTS_COMMENTS),
+    'name': getRandomArrayElement(COMMENT_NAMES),
   });
 
   return {
     'id': randomPostId(),
     'url': `photos/${randomPostUrl()}.jpg`,
     'description': randomPostDescription,
-    'likes': randomPostLikes(),
+    'likes': getRandomInteger(15, 200),
     'comments': Array.from({length: getRandomInteger(0, 30)}, createComment),
   };
 };
