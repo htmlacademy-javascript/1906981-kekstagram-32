@@ -44,3 +44,24 @@ function getNumber(stroke) {
 }
 
 console.log(getNumber('а я томат'));
+
+// Проверка времени встречи
+
+const isMeetingFits = (dayBeginning = '', dayEnding = '', meetingBeginning = '', meetingDuration) => {
+  // перевести время в числовой тип
+  // перевести время в длительность (мин)
+  // сравнить начало и конец с началом встречи
+
+  const toMinutes = (value) => {
+    return (value.split(':').map(function(x) {
+      return parseInt(x, 10);
+    }));
+  };
+
+  dayBeginning = toMinutes(dayBeginning);
+  dayEnding = toMinutes(dayEnding);
+  meetingBeginning = toMinutes(meetingBeginning);
+  console.log(dayBeginning, dayEnding, meetingBeginning);
+};
+
+isMeetingFits('08:00', '17:30', '14:00', 90);
