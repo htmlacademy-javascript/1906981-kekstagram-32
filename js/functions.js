@@ -47,21 +47,27 @@ console.log(getNumber('а я томат'));
 
 // Проверка времени встречи
 
-const isMeetingFits = (dayBeginning = '', dayEnding = '', meetingBeginning = '', meetingDuration) => {
-  // перевести время в числовой тип
-  // перевести время в длительность (мин)
-  // сравнить начало и конец с началом встречи
-
-  const toMinutes = (value) => {
-    return (value.split(':').map(function(x) {
-      return parseInt(x, 10);
-    }));
-  };
-
-  dayBeginning = toMinutes(dayBeginning);
-  dayEnding = toMinutes(dayEnding);
-  meetingBeginning = toMinutes(meetingBeginning);
-  console.log(dayBeginning, dayEnding, meetingBeginning);
+const converseToMinutes = (timeStroke) => {
+  const timeInMinutes = timeStroke.split(':');
+  return (parseInt(timeInMinutes[0], 10) * 60 + parseInt(timeInMinutes[1], 10));
 };
 
-isMeetingFits('08:00', '17:30', '14:00', 90);
+const isMeetingFits = (dayBeginning = '', dayEnding = '', meetingBeginning = '', meetingDuration) => {
+  dayBeginning = converseToMinutes(dayBeginning);
+  dayEnding = converseToMinutes(dayEnding);
+  meetingBeginning = converseToMinutes(meetingBeginning);
+
+  if (meetingBeginning >= dayBeginning) {
+    if ((meetingBeginning + meetingDuration) <= dayEnding) {
+      return console.log(true);
+    }
+  }
+
+  return console.log(false);
+};
+
+isMeetingFits('08:00', '17:30', '14:00', 90); // true
+isMeetingFits('8:0', '10:0', '8:0', 120); // true
+isMeetingFits('08:00', '14:30', '14:00', 90); // false
+isMeetingFits('14:00', '17:30', '08:0', 90); // false
+isMeetingFits('8:00', '17:30', '08:00', 900); // false
