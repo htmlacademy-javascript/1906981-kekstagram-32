@@ -1,4 +1,7 @@
 import './variables.js';
-import './miniatures.js';
+import {randomPosts} from './data.js';
+import {renderPosts} from './miniatures.js';
 
+const miniPictures = randomPosts();
 
+renderPosts(miniPictures);
