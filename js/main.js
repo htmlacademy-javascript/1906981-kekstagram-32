@@ -1,5 +1,4 @@
 import './variables.js';
-import {randomPosts} from './data.js';
+import './miniatures.js';
 
-console.log(randomPosts);
 
