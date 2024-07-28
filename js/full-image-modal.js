@@ -12,10 +12,11 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-const openUserModal = () => {
+const openUserModal = (photo) => {
   fullImage.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  renderFullImage(photo);
 };
 
 const closeUserModal = () => {
@@ -26,8 +27,5 @@ const closeUserModal = () => {
 
 closeButton.addEventListener('click', closeUserModal);
 
-const showModal = (photo) => {
-  renderFullImage(photo);
-};
 
-export {showModal, openUserModal, closeUserModal};
+export { openUserModal, closeUserModal };
