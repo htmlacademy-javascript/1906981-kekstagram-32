@@ -1,10 +1,13 @@
-import { miniPictures } from './main';
 import { openUserModal } from './full-image-modal';
 
 const picturesList = document.querySelector('.pictures');
 const miniTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const renderPosts = (localPictures) => {
+const localPictures = [];
+
+const renderPosts = (data) => {
+  localPictures.length = 0;
+  localPictures.push(...data.slice());
   const localPicturesList = document.createDocumentFragment();
 
   localPictures.forEach(({url, description, likes, comments, id}) => {
@@ -22,14 +25,12 @@ const renderPosts = (localPictures) => {
   picturesList.appendChild(localPicturesList);
 };
 
-renderPosts(miniPictures);
-
 picturesList.addEventListener('click', (evt) => {
   const currentPicture = evt.target.closest('.picture');
 
   if (currentPicture) {
     const currentId = Number(currentPicture.dataset.marker);
-    const currentData = miniPictures.find((item) => item.id === currentId);
+    const currentData = localPictures.find((item) => item.id === currentId);
     openUserModal(currentData);
   }
 });

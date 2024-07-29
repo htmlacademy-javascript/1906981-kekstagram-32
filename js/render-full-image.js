@@ -5,8 +5,9 @@ const likesCount = document.querySelector('.likes-count');
 const shownComments = document.querySelector('.social__comment-shown-count');
 const totalComments = document.querySelector('.social__comment-total-count');
 const photoCaption = document.querySelector('.social__caption');
-
 const commentsList = document.querySelector('.social__comments');
+
+const localComments = [];
 
 const renderComment = ({avatar, name, message}) => {
   const newElement = document.createElement('li');
@@ -26,21 +27,23 @@ const renderComment = ({avatar, name, message}) => {
 };
 
 const renderComments = () => {
-  const localPictureComments = Array(document.createDocumentFragment());
+  const localPictureComments = document.createDocumentFragment();
 
-  localPictureComments.forEach((item) => {
-    renderComment(item);
+  localComments.splice(0, 5).forEach((item) => {
+    localPictureComments.append(renderComment(item));
   });
 
   commentsList.append(localPictureComments);
 };
 
 const renderFullImage = ({url, likes, comments, description}) => {
-
+  localComments.length = 0;
+  localComments.push(...comments.slice());
   image.src = url;
   likesCount.textContent = likes;
   totalComments.textContent = comments.length;
   photoCaption.text = description;
+  commentsList.innerHTML = '';
 
   renderComments();
 };
