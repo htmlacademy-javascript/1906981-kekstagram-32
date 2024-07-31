@@ -7,6 +7,9 @@ export const AVATAR_WIDTH = 35;
 export const AVATAR_HEIGHT = 35;
 export const SHOWN_COMMENTS_PORTION = 5;
 
+export const DESCRIPTION_FIELD_MAX_LENGTH = 140;
+export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1-19}$/i;
+
 export const POSTS_DESCRIPTIONS = [
   'И мое сердце остановилось, мое сердце замерло.',
   'Не слушай никого, лишь свое сердце',
