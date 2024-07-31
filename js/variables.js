@@ -5,6 +5,7 @@ export const MAX_LIKES = 200;
 export const COMMENTS_COUNT = 30;
 export const AVATAR_WIDTH = 35;
 export const AVATAR_HEIGHT = 35;
+export const SHOWN_COMMENTS_PORTION = 5;
 
 export const POSTS_DESCRIPTIONS = [
   'И мое сердце остановилось, мое сердце замерло.',
