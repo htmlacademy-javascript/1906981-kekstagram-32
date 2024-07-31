@@ -9,6 +9,7 @@ const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     fullImage.classList.add('hidden');
+    body.classList.remove('modal-open');
   }
 };
 
