@@ -1,4 +1,4 @@
-import { AVATAR_WIDTH, AVATAR_HEIGHT } from './variables.js';
+import { AVATAR_WIDTH, AVATAR_HEIGHT, SHOWN_COMMENTS_PORTION } from './variables.js';
 
 const image = document.querySelector('.big-picture__img img');
 const likesCount = document.querySelector('.likes-count');
@@ -6,6 +6,7 @@ const shownComments = document.querySelector('.social__comment-shown-count');
 const totalComments = document.querySelector('.social__comment-total-count');
 const photoCaption = document.querySelector('.social__caption');
 const commentsList = document.querySelector('.social__comments');
+const commentsLoader = document.querySelector('.comments-loader');
 
 const localComments = [];
 
@@ -29,7 +30,7 @@ const renderComment = ({avatar, name, message}) => {
 const renderComments = () => {
   const localPictureComments = document.createDocumentFragment();
 
-  localComments.splice(0, 5).forEach((item) => {
+  localComments.splice(0, SHOWN_COMMENTS_PORTION).forEach((item) => {
     localPictureComments.append(renderComment(item));
   });
 
@@ -42,10 +43,28 @@ const renderFullImage = ({url, likes, comments, description}) => {
   image.src = url;
   likesCount.textContent = likes;
   totalComments.textContent = comments.length;
-  photoCaption.text = description;
+  photoCaption.textContent = description;
   commentsList.innerHTML = '';
 
+  if (comments.length > SHOWN_COMMENTS_PORTION) {
+    shownComments.textContent = SHOWN_COMMENTS_PORTION;
+    commentsLoader.classList.remove('hidden');
+  } else {
+    shownComments.textContent = comments.length;
+    commentsLoader.classList.add('hidden');
+  }
+
   renderComments();
+  console.log(localComments.length);
+
+  commentsLoader.addEventListener('click', () => {
+    renderComments();
+    shownComments.textContent = comments.length - localComments.length;
+    console.log(localComments.length);
+    if (Number(shownComments.textContent) === comments.length) {
+      commentsLoader.classList.add('hidden');
+    }
+  });
 };
 
 export { renderFullImage };
