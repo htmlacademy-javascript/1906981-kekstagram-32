@@ -9,6 +9,7 @@ const commentsList = document.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.comments-loader');
 
 const localComments = [];
+let total;
 
 const renderComment = ({avatar, name, message}) => {
   const newElement = document.createElement('li');
@@ -27,6 +28,18 @@ const renderComment = ({avatar, name, message}) => {
   return newElement;
 };
 
+const renderLoader = () => {
+  if (!localComments.length) {
+    commentsLoader.classList.add('hidden');
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
+};
+
+const renderStatistic = () => {
+  shownComments.textContent = total - localComments.length;
+};
+
 const renderComments = () => {
   const localPictureComments = document.createDocumentFragment();
 
@@ -35,36 +48,25 @@ const renderComments = () => {
   });
 
   commentsList.append(localPictureComments);
+
+  renderLoader();
+  renderStatistic();
 };
 
 const renderFullImage = ({url, likes, comments, description}) => {
   localComments.length = 0;
   localComments.push(...comments.slice());
+  total = comments.length;
   image.src = url;
   likesCount.textContent = likes;
-  totalComments.textContent = comments.length;
+  totalComments.textContent = total;
   photoCaption.textContent = description;
   commentsList.innerHTML = '';
-
-  if (comments.length > SHOWN_COMMENTS_PORTION) {
-    shownComments.textContent = SHOWN_COMMENTS_PORTION;
-    commentsLoader.classList.remove('hidden');
-  } else {
-    shownComments.textContent = comments.length;
-    commentsLoader.classList.add('hidden');
-  }
-
   renderComments();
-  console.log(localComments.length);
-
-  commentsLoader.addEventListener('click', () => {
-    renderComments();
-    shownComments.textContent = comments.length - localComments.length;
-    console.log(localComments.length);
-    if (Number(shownComments.textContent) === comments.length) {
-      commentsLoader.classList.add('hidden');
-    }
-  });
 };
+
+commentsLoader.addEventListener('click', () => {
+  renderComments();
+});
 
 export { renderFullImage };
