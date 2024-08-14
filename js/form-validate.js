@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { DESCRIPTION_FIELD_MAX_LENGTH, HASHTAG_PATTERN, HASHTAGS_AMOUNT } from './variables.js';
+import { FILTERS } from './variables.js';
+import { createSlider, resetFilter } from './img-filters.js';
 
 const body = document.querySelector('body');
 const imageForm = document.querySelector('.img-upload__form');
@@ -29,6 +31,7 @@ const closeImageModal = () => {
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   imageInput.value = '';
+  resetFilter();
 };
 
 imageInput.addEventListener('change', () => {
@@ -107,3 +110,7 @@ hashTagsField.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
   }
 });
+
+/*  */
+
+createSlider(FILTERS.none);
