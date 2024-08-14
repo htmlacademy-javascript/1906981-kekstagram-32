@@ -11,6 +11,10 @@ export const DESCRIPTION_FIELD_MAX_LENGTH = 140;
 export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 export const HASHTAGS_AMOUNT = 5;
 
+export const SCALE_STEP = 25;
+export const SCALE_MIN = 25;
+export const SCALE_MAX = 100;
+
 export const POSTS_DESCRIPTIONS = [
   'И мое сердце остановилось, мое сердце замерло.',
   'Не слушай никого, лишь свое сердце',
