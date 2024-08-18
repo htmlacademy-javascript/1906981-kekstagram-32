@@ -1,4 +1,4 @@
-import { openUserModal } from './full-image-modal';
+import { openUserModal } from './full-image-modal.js';
 
 const picturesList = document.querySelector('.pictures');
 const miniTemplate = document.querySelector('#picture').content.querySelector('.picture');

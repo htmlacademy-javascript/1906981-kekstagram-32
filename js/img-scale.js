@@ -1,4 +1,4 @@
-import { SCALE_STEP, SCALE_MIN, SCALE_MAX } from './variables';
+import { SCALE_STEP, SCALE_MIN, SCALE_MAX } from './variables.js';
 
 const scaleMinButton = document.querySelector('.scale__control--smaller');
 const scaleMaxButton = document.querySelector('.scale__control--bigger');

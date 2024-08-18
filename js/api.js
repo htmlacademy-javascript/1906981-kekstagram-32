@@ -1,5 +1,5 @@
-import { showDataError } from './api-get';
-import { BASE_URL, Route } from './variables';
+import { showDataError } from './api-get.js';
+import { BASE_URL, Route } from './variables.js';
 
 const getData = (onSuccess) => {
   fetch(`${BASE_URL}${Route.GET_DATA}`)
