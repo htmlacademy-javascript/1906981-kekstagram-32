@@ -2,6 +2,8 @@ import { isEscapeKey } from './util.js';
 import { DESCRIPTION_FIELD_MAX_LENGTH, HASHTAG_PATTERN, HASHTAGS_AMOUNT } from './variables.js';
 import { FILTERS } from './variables.js';
 import { createSlider, resetFilter } from './img-filters.js';
+import { blockSubmitButton, showErrorMessage, showSuccessMessage, unblockSubmitButton } from './api-post.js';
+import { sendData } from './api.js';
 
 const body = document.querySelector('body');
 const imageForm = document.querySelector('.img-upload__form');
@@ -64,7 +66,6 @@ const hashTagsField = imageForm.querySelector('.text__hashtags');
 
 const optimizedHashtags = (value) => !value.length ? [] : hashTagsField.value.toLowerCase().trim().split(' ');
 
-
 const validateHashtagPattern = (value) => {
   const hashtags = optimizedHashtags(value);
   return (hashtags.every((hashtag) => HASHTAG_PATTERN.test(hashtag)));
@@ -111,6 +112,27 @@ hashTagsField.addEventListener('keydown', (evt) => {
   }
 });
 
-/*  */
+imageForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    blockSubmitButton();
+
+    const formData = new FormData(evt.target);
+    sendData(formData)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+        closeImageModal();
+        showSuccessMessage();
+      })
+      .catch(() => showErrorMessage())
+      .finally(() => unblockSubmitButton());
+  }
+});
 
 createSlider(FILTERS.none);
+
+export { onDocumentKeydown };

@@ -2,6 +2,7 @@ import { FILTERS } from './variables';
 
 const previewImage = document.querySelector('.img-upload__preview img');
 const effectValue = document.querySelector('.effect-level__value');
+const effectContainer = document.querySelector('.effect-level');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 
@@ -9,10 +10,12 @@ const effectsArray = Object.keys(FILTERS).map((key) => FILTERS[key]);
 
 const showSlider = () => {
   effectSlider.classList.remove('hidden');
+  effectContainer.classList.remove('hidden');
 };
 
 const hideSlider = () => {
   effectSlider.classList.add('hidden');
+  effectContainer.classList.add('hidden');
 };
 
 const setFilter = ({ style, max, unit }) => {
