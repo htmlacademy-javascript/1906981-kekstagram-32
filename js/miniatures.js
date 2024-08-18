@@ -5,7 +5,13 @@ const miniTemplate = document.querySelector('#picture').content.querySelector('.
 
 const localPictures = [];
 
+const clearPosts = () => {
+  document.querySelectorAll('.picture').forEach((element) => element.remove());
+};
+
 const renderPosts = (data) => {
+  clearPosts();
+
   localPictures.length = 0;
   localPictures.push(...data.slice());
   const localPicturesList = document.createDocumentFragment();
