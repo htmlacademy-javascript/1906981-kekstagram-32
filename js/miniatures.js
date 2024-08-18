@@ -1,11 +1,17 @@
-import { openUserModal } from './full-image-modal';
+import { openUserModal } from './full-image-modal.js';
 
 const picturesList = document.querySelector('.pictures');
 const miniTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const localPictures = [];
 
+const clearPosts = () => {
+  document.querySelectorAll('.picture').forEach((element) => element.remove());
+};
+
 const renderPosts = (data) => {
+  clearPosts();
+
   localPictures.length = 0;
   localPictures.push(...data.slice());
   const localPicturesList = document.createDocumentFragment();

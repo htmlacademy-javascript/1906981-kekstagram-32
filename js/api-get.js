@@ -1,4 +1,4 @@
-import { ERROR_SHOW_TIME } from './variables';
+import { ERROR_SHOW_TIME } from './variables.js';
 
 const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 

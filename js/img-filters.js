@@ -1,4 +1,4 @@
-import { FILTERS } from './variables';
+import { FILTERS } from './variables.js';
 
 const previewImage = document.querySelector('.img-upload__preview img');
 const effectValue = document.querySelector('.effect-level__value');

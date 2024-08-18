@@ -1,5 +1,6 @@
-import { showDataError } from './api-get';
-import { BASE_URL, Route } from './variables';
+import { showDataError } from './api-get.js';
+import { BASE_URL, Route } from './variables.js';
+import { onFilterClick, showFilters } from './filters.js';
 
 const getData = (onSuccess) => {
   fetch(`${BASE_URL}${Route.GET_DATA}`)
@@ -9,7 +10,11 @@ const getData = (onSuccess) => {
       }
       return response.json();
     })
-    .then((data) => onSuccess(data))
+    .then((data) => {
+      onSuccess(data);
+      showFilters();
+      onFilterClick(data);
+    })
     .catch(() => showDataError());
 };
 
