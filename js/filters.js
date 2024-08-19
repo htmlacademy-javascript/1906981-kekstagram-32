@@ -1,13 +1,11 @@
 import { renderPosts } from './miniatures.js';
 import { debounce, getRandomArrayElement } from './util.js';
+import { RERENDER_DELAY, RANDOM_POSTS_AMOUNT } from './variables.js';
 
 const filters = document.querySelector('.img-filters');
 const defaultButton = document.querySelector('#filter-default');
 const randomButton = document.querySelector('#filter-random');
 const discussedButton = document.querySelector('#filter-discussed');
-
-const RANDOM_POSTS_AMOUNT = 10;
-const RERENDER_DELAY = 500;
 
 const showFilters = () => {
   filters.classList.remove('img-filters--inactive');

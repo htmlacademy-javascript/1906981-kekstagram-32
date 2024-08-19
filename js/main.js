@@ -1,4 +1,3 @@
-import './variables.js';
 import { renderPosts } from './miniatures.js';
 import './img-scale.js';
 import './img-filters.js';

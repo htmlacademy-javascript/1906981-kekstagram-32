@@ -53,6 +53,7 @@ export const SHOWN_COMMENTS_PORTION = 5;
 
 export const DESCRIPTION_FIELD_MAX_LENGTH = 140;
 export const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
+export const SPACELIKE_CHARS = /\s+/g;
 export const HASHTAGS_AMOUNT = 5;
 
 export const FILTERS = {
@@ -111,6 +112,12 @@ export const SCALE_MIN = 25;
 export const SCALE_MAX = 100;
 
 export const BASE_URL = 'https://32.javascript.htmlacademy.pro/kekstagram';
+
+export const ERROR_SHOW_TIME = 5000;
+
+export const RANDOM_POSTS_AMOUNT = 10;
+export const RERENDER_DELAY = 500;
+
 export const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
@@ -120,6 +127,3 @@ export const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикация...'
 };
-
-export const ERROR_SHOW_TIME = 5000;
-

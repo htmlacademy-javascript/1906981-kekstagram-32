@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { DESCRIPTION_FIELD_MAX_LENGTH, HASHTAG_PATTERN, HASHTAGS_AMOUNT } from './variables.js';
+import { DESCRIPTION_FIELD_MAX_LENGTH, HASHTAG_PATTERN, HASHTAGS_AMOUNT, SPACELIKE_CHARS } from './variables.js';
 import { FILTERS } from './variables.js';
 import { createSlider, resetFilter } from './img-filters.js';
 import { blockSubmitButton, showErrorMessage, showSuccessMessage, unblockSubmitButton } from './api-post.js';
@@ -24,6 +24,8 @@ const onDocumentKeydown = (evt) => {
     evt.preventDefault();
     editForm.classList.add('hidden');
     body.classList.remove('modal-open');
+    imageForm.reset();
+    pristine.reset();
     imageInput.value = '';
   }
 };
@@ -32,6 +34,8 @@ const closeImageModal = () => {
   editForm.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  pristine.reset();
+  imageForm.reset();
   imageInput.value = '';
   resetFilter();
 };
@@ -64,21 +68,21 @@ pristine.addValidator(descriptionField, validateDescription, getDescriptionError
 
 const hashTagsField = imageForm.querySelector('.text__hashtags');
 
-const optimizedHashtags = (value) => !value.length ? [] : hashTagsField.value.toLowerCase().trim().split(' ');
+const optimizeHashtags = (value) => !value.length ? [] : hashTagsField.value.toLowerCase().replaceAll(SPACELIKE_CHARS, ' ').trim().split(' ');
 
 const validateHashtagPattern = (value) => {
-  const hashtags = optimizedHashtags(value);
+  const hashtags = optimizeHashtags(value);
   return (hashtags.every((hashtag) => HASHTAG_PATTERN.test(hashtag)));
 };
 
 const checkUnique = (value) => {
-  const hashtags = optimizedHashtags(value);
+  const hashtags = optimizeHashtags(value);
   const uniques = [...new Set(hashtags)];
   return hashtags.length === uniques.length;
 };
 
 const checkAmount = (value) => {
-  const hashtags = optimizedHashtags(value);
+  const hashtags = optimizeHashtags(value);
   return !(hashtags.length > HASHTAGS_AMOUNT);
 };
 
@@ -128,7 +132,10 @@ imageForm.addEventListener('submit', (evt) => {
         closeImageModal();
         showSuccessMessage();
       })
-      .catch(() => showErrorMessage())
+      .catch(() => {
+        showErrorMessage();
+        closeImageModal();
+      })
       .finally(() => unblockSubmitButton());
   }
 });
