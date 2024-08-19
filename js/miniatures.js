@@ -21,7 +21,7 @@ const renderPosts = (data) => {
     const pictureImage = localPictureElement.querySelector('.picture__img');
 
     pictureImage.src = url;
-    pictureImag.alt = description;
+    pictureImage.alt = description;
     localPictureElement.querySelector('.picture__likes').textContent = likes;
     localPictureElement.querySelector('.picture__comments').textContent = comments.length;
 
