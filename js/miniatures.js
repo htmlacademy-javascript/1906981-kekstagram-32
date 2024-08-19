@@ -18,9 +18,10 @@ const renderPosts = (data) => {
 
   localPictures.forEach(({url, description, likes, comments, id}) => {
     const localPictureElement = miniTemplate.cloneNode(true);
+    const pictureImage = localPictureElement.querySelector('.picture__img');
 
-    localPictureElement.querySelector('.picture__img').src = url;
-    localPictureElement.querySelector('.picture__img').alt = description;
+    pictureImage.src = url;
+    pictureImage.alt = description;
     localPictureElement.querySelector('.picture__likes').textContent = likes;
     localPictureElement.querySelector('.picture__comments').textContent = comments.length;
 
