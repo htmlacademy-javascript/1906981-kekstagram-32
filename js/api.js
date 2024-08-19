@@ -19,7 +19,7 @@ const getData = (onSuccess) => {
 };
 
 const sendData = (formData) =>
-  fetch(`${BASE_URL}`,
+  fetch(`${BASE_URL}${Route.SEND_DATA}`,
     {
       method: 'POST',
       body: formData
