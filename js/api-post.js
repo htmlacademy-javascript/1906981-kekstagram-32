@@ -11,22 +11,20 @@ const errorMessage = errorMessageTemplate.cloneNode(true);
 const submitButton = document.querySelector('.img-upload__submit');
 
 const showMessage = (message, button, messageInner) => {
-  document.addEventListener('click', onDocumentClick);
+  message.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentKeydownMessage);
   document.removeEventListener('keydown', onDocumentKeydown);
 
   const deleteMessage = () => {
-    message.remove();
-    document.removeEventListener('click', onDocumentClick);
     document.removeEventListener('keydown', onDocumentKeydownMessage);
     if (message.classList.contains('error')) {
       document.addEventListener('keydown', onDocumentKeydown);
     }
+    message.remove();
   };
 
   function onDocumentClick (evt) {
-    const messageElement = evt.target.closest(messageInner);
-    if (evt.target !== messageElement) {
+    if (evt.target !== messageInner) {
       deleteMessage();
     }
   }
@@ -34,26 +32,22 @@ const showMessage = (message, button, messageInner) => {
   function onDocumentKeydownMessage (evt) {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
-      message.remove();
+      deleteMessage();
     }
   }
-
-  button.addEventListener('click', () => {
-    deleteMessage();
-  });
 };
 
 const showSuccessMessage = () => {
   document.body.appendChild(successMessage);
   const successCloseButton = successMessage.querySelector('.success__button');
-  const successInner = successMessage.querySelector('.success');
+  const successInner = successMessage.querySelector('.success__inner');
   showMessage(successMessage, successCloseButton, successInner);
 };
 
 const showErrorMessage = () => {
   document.body.appendChild(errorMessage);
   const errorCloseButton = errorMessage.querySelector('.error__button');
-  const errorInner = errorMessage.querySelector('.error');
+  const errorInner = errorMessage.querySelector('.error__inner');
   showMessage(errorMessage, errorCloseButton, errorInner);
 };
 

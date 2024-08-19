@@ -134,7 +134,6 @@ imageForm.addEventListener('submit', (evt) => {
       })
       .catch(() => {
         showErrorMessage();
-        closeImageModal();
       })
       .finally(() => unblockSubmitButton());
   }
